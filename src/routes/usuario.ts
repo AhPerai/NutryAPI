@@ -12,5 +12,6 @@ usuarioRouter.put('/usuario/:id', usuarioController.updateUsuario)
 usuarioRouter.delete('/usuario/:id', usuarioController.deleteUsuario)
 
 usuarioRouter.post('/usuario/login', usuarioController.verifyLogin)
+usuarioRouter.get('/usuario/refeicao/:id_usuario', usuarioController.listRefeicaoOfUsuario);
 
 export default usuarioRouter;

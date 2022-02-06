@@ -4,8 +4,6 @@ import { Refeicao } from '../models/Refeicao'
 
 export const createRefeicao = async (req: Request, res: Response) =>{
     let { data, UsuarioIdUsuario } = req.body;
-    console.log(data);
-    console.log(UsuarioIdUsuario);
     let newRefeicao = await Refeicao.create({ data, UsuarioIdUsuario });
     
     res.status(201);

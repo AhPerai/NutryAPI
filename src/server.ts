@@ -5,6 +5,7 @@ import cors from 'cors'
 import usuarioRoutes from './routes/usuario'
 import categoriaRoutes from './routes/categoria'
 import refeicaoRoutes from './routes/refeicao'
+import alimentoRoutes from './routes/alimento'
 
 //Iniciando as variáveis de ambiente
 dotenv.config();
@@ -23,6 +24,7 @@ server.use(express.urlencoded({extended: true}))
 server.use(usuarioRoutes)
 server.use(categoriaRoutes)
 server.use(refeicaoRoutes)
+server.use(alimentoRoutes)
 
 //Endpoints básicos do servidor
 server.use((req: Request, res: Response) => {

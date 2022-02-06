@@ -1,4 +1,5 @@
 import {Request, Response} from 'express';
+import { Refeicao } from '../models/Refeicao';
 
 import { Usuario } from '../models/Usuario'
 
@@ -14,39 +15,19 @@ export const createUsuario = async (req: Request, res: Response) =>{
 }
 
 export const listUsuario = async (req: Request, res: Response) =>{
-    let list = await Usuario.findAll();
+    let list = await Usuario.findAll({include: Refeicao});
     res.json({ list });
 }
 
 export const getUsuario = async (req: Request, res: Response) =>{
     let { id } = req.params;
 
-    let usuario = await Usuario.findByPk(id);
+    let usuario = await Usuario.findByPk(id, {include: Refeicao});
+
     if(usuario){
         res.json({ usuario })
     }else {
         res.json({ error: 'Usuário não encontrado' })
-    }
-}
-
-export const verifyLogin = async (req: Request, res:Response)=>{
-    let { email, senha } = req.body;
-
-    let usuario =  await Usuario.findOne({
-        where : {
-            email: email
-        }
-    });
-    if(usuario){
-        if(usuario.senha == senha){
-            res.json({ usuario })
-        }else{
-            res.status(400);
-            res.json({ error: 'Login inválido' })
-        }
-    }else {
-        res.status(400);
-        res.json({ error: 'Login inválido' })
     }
 }
 
@@ -74,6 +55,37 @@ export const deleteUsuario = async (req: Request, res: Response) =>{
     let { id } = req.params;
     await Usuario.destroy({ where: { id_usuario: id } });
     res.json({});
+}
+
+export const verifyLogin = async (req: Request, res:Response)=>{
+    let { email, senha } = req.body;
+
+    let usuario =  await Usuario.findOne({
+        where : {
+            email: email
+        }
+    });
+    if(usuario){
+        if(usuario.senha == senha){
+            res.json({ usuario })
+        }else{
+            res.status(400);
+            res.json({ error: 'Login inválido' })
+        }
+    }else {
+        res.status(400);
+        res.json({ error: 'Login inválido' })
+    }
+}
+
+export const listRefeicaoOfUsuario = async (req: Request, res: Response) =>{
+    let { id_usuario } = req.params;
+    let list = await Refeicao.findAll({
+        where : {
+            UsuarioIdUsuario: id_usuario
+        }
+    });
+    res.json({ list });
 }
 
 

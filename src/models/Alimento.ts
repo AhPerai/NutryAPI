@@ -1,13 +1,13 @@
 import { Model, DataTypes } from 'sequelize';
 import { sequelize } from '../instances/pg';
 
-export interface CategoriaInstance extends Model{
-    id_categoria: number;
+export interface AlimentoInstance extends Model{
+    id_alimento: number;
     nome: string;
 }
 
-export const Categoria = sequelize.define<CategoriaInstance>('Categoria', {
-    id_categoria: {
+export const Alimento = sequelize.define<AlimentoInstance>('Refeicao', {
+    id_alimento: {
         primaryKey: true,
         autoIncrement: true,
         type: DataTypes.INTEGER
@@ -16,8 +16,8 @@ export const Categoria = sequelize.define<CategoriaInstance>('Categoria', {
         type: DataTypes.STRING
     }
 }, { 
-    tableName: 'categoria',
+    tableName: 'refeicao',
     timestamps: false
 })
 
-Categoria.sync({ alter: true });
+Alimento.sync();
