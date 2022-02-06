@@ -12,3 +12,5 @@ export const sequelize = new Sequelize(
         port: parseInt(process.env.PG_PORT as string)
     }
 );
+
+sequelize.sync();

@@ -2,20 +2,6 @@ import {Request, Response} from 'express';
 
 import { Usuario } from '../models/Usuario'
 
-export const ping = (req: Request, res: Response) => {
-    res.json({pong: true});
-}
-
-export const random = (req: Request, res: Response) =>{
-    let random: number = Math.floor( Math.random() * 10);
-    res.json({number : random})
-}
-
-export const nome = (req: Request, res: Response) =>{
-    let nome: string = req.params.nome;
-    res.json({nome})
-}
-
 //Usuario
 
 export const createUsuario = async (req: Request, res: Response) =>{
@@ -40,6 +26,27 @@ export const getUsuario = async (req: Request, res: Response) =>{
         res.json({ usuario })
     }else {
         res.json({ error: 'Usuário não encontrado' })
+    }
+}
+
+export const verifyLogin = async (req: Request, res:Response)=>{
+    let { email, senha } = req.body;
+
+    let usuario =  await Usuario.findOne({
+        where : {
+            email: email
+        }
+    });
+    if(usuario){
+        if(usuario.senha == senha){
+            res.json({ usuario })
+        }else{
+            res.status(400);
+            res.json({ error: 'Login inválido' })
+        }
+    }else {
+        res.status(400);
+        res.json({ error: 'Login inválido' })
     }
 }
 

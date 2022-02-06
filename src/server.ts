@@ -3,6 +3,8 @@ import path from 'path'
 import dotenv from 'dotenv'
 import cors from 'cors'
 import usuarioRoutes from './routes/usuario'
+import categoriaRoutes from './routes/categoria'
+import refeicaoRoutes from './routes/refeicao'
 
 //Iniciando as variáveis de ambiente
 dotenv.config();
@@ -19,6 +21,8 @@ server.use(express.urlencoded({extended: true}))
 
 //Rotas
 server.use(usuarioRoutes)
+server.use(categoriaRoutes)
+server.use(refeicaoRoutes)
 
 //Endpoints básicos do servidor
 server.use((req: Request, res: Response) => {
