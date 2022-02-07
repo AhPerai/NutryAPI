@@ -37,8 +37,4 @@ export const Usuario = sequelize.define<UsuarioInstance>('Usuario', {
     timestamps: false
 });
 
-Usuario.hasMany(Refeicao);
-Refeicao.belongsTo(Usuario);
-
-Refeicao.sync({ alter:true});
 Usuario.sync({ alter:true});

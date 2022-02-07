@@ -6,7 +6,7 @@ export interface AlimentoInstance extends Model{
     nome: string;
 }
 
-export const Alimento = sequelize.define<AlimentoInstance>('Refeicao', {
+export const Alimento = sequelize.define<AlimentoInstance>('Alimento', {
     id_alimento: {
         primaryKey: true,
         autoIncrement: true,
@@ -16,8 +16,8 @@ export const Alimento = sequelize.define<AlimentoInstance>('Refeicao', {
         type: DataTypes.STRING
     }
 }, { 
-    tableName: 'refeicao',
+    tableName: 'alimento',
     timestamps: false
 })
 
-Alimento.sync();
+Alimento.sync({ alter: true });
