@@ -2,7 +2,7 @@ import { Model, DataTypes } from 'sequelize';
 import { sequelize } from '../instances/pg';
 import { Refeicao } from '../models/Refeicao'
 
-export class UsuarioInstance extends Model {
+export class Usuario extends Model {
     declare id_usuario: number;
     declare email: string;
     declare senha: string;
@@ -11,7 +11,7 @@ export class UsuarioInstance extends Model {
     declare genero: string;
 }
 
-export const Usuario = sequelize.define<UsuarioInstance>('Usuario', {
+Usuario.init( {
     id_usuario: {
         primaryKey: true,
         autoIncrement: true,
@@ -33,8 +33,9 @@ export const Usuario = sequelize.define<UsuarioInstance>('Usuario', {
         type: DataTypes.STRING
     }
 }, {
+    sequelize,
     tableName: 'usuario',
     timestamps: false
-});
+})
 
-Usuario.sync();
+Usuario.sync({ alter: true });

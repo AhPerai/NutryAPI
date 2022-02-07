@@ -1,12 +1,12 @@
 import { Model, DataTypes } from 'sequelize';
 import { sequelize } from '../instances/pg';
 
-export class CategoriaInstance extends Model{
+export class Categoria extends Model{
     declare id_categoria: number;
     declare nome: string;
 }
 
-export const Categoria = sequelize.define<CategoriaInstance>('Categoria', {
+Categoria.init({
     id_categoria: {
         primaryKey: true,
         autoIncrement: true,
@@ -15,9 +15,10 @@ export const Categoria = sequelize.define<CategoriaInstance>('Categoria', {
     nome:{
         type: DataTypes.STRING
     }
-}, { 
+},{ 
+    sequelize,
     tableName: 'categoria',
     timestamps: false
 })
 
-Categoria.sync();
+Categoria.sync({ alter: true });

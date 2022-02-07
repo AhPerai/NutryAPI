@@ -2,21 +2,22 @@ import { Model, DataTypes } from 'sequelize';
 import { sequelize } from '../instances/pg';
 import { Usuario } from '../models/Usuario'
 
-export interface RefeicaoInstance extends Model{
-    id_refeicao: number;
-    data: Date;
+export class Refeicao extends Model {
+    declare id_refeicao: number;
+    declare data: Date;
 }
 
-export const Refeicao = sequelize.define<RefeicaoInstance>('Refeicao', {
+Refeicao.init({
     id_refeicao: {
         primaryKey: true,
         autoIncrement: true,
         type: DataTypes.INTEGER
     },
-    data:{
+    data: {
         type: DataTypes.DATE
     }
-}, { 
+},{
+    sequelize,
     tableName: 'refeicao',
     timestamps: false
 })
