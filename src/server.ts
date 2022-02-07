@@ -7,8 +7,10 @@ import usuarioRoutes from './routes/usuario'
 import categoriaRoutes from './routes/categoria'
 import refeicaoRoutes from './routes/refeicao'
 import alimentoRoutes from './routes/alimento'
-//Juction Models
+import vitaminaRoutes from './routes/vitamina'
+//Junction Models
 import refeicao_alimentoRoutes from './routes/refeicao_alimento'
+import alimento_vitaminaRoutes from './routes/alimento_vitamina'
 
 //Iniciando as variáveis de ambiente
 dotenv.config();
@@ -28,7 +30,11 @@ server.use(usuarioRoutes)
 server.use(categoriaRoutes)
 server.use(refeicaoRoutes)
 server.use(alimentoRoutes)
+server.use(vitaminaRoutes)
+//Junction Table routes
 server.use(refeicao_alimentoRoutes)
+server.use(alimento_vitaminaRoutes)
+
 
 //Endpoints básicos do servidor
 server.use((req: Request, res: Response) => {

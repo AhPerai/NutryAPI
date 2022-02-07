@@ -1,28 +1,24 @@
 import { Model, DataTypes } from 'sequelize';
 import { sequelize } from '../instances/pg';
-import { Categoria } from './Categoria';
 
-export class Alimento extends Model {
-    declare id_alimento: number;
+export class Vitamina extends Model {
+    declare id_vitamina: number;
     declare nome: string;
 }
 
-Alimento.init({
-    id_alimento: {
+Vitamina.init({
+    id_vitamina: {
         primaryKey: true,
         autoIncrement: true,
         type: DataTypes.INTEGER
     },
-    nome: {
+    nome:{
         type: DataTypes.STRING
     }
-}, {
+},{ 
     sequelize,
-    tableName: 'alimento',
+    tableName: 'vitamina',
     timestamps: false
 })
 
-Categoria.hasMany(Alimento);
-Alimento.belongsTo(Categoria);
-
-Alimento.sync({ alter: true });
+Vitamina.sync({ alter: true });

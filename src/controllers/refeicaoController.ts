@@ -4,6 +4,18 @@ import { Refeicao } from '../models/Refeicao'
 import { Alimento } from '../models/Alimento'
 import { Refeicao_Alimento } from '../models/Refeicao_Alimento'
 
+export const getRefeicao = async (req: Request, res: Response) =>{
+    let { id } = req.params;
+
+    let refeicao = await Refeicao.findByPk(id, {include: Alimento});
+
+    if(refeicao){
+        res.json({ refeicao })
+    }else {
+        res.json({ error: 'Refeição não encontrada' })
+    }
+}
+
 export const createRefeicao = async (req: Request, res: Response) => {
     let { data, UsuarioIdUsuario } = req.body;
     let newRefeicao = await Refeicao.create({ data, UsuarioIdUsuario });
