@@ -1,0 +1,1 @@
+Caso 01: Se alguma tabela conjunta ou chave estrangeira não carregar é pq alguém perdeu  a primary key 

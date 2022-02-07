@@ -1,9 +1,9 @@
 import { Model, DataTypes } from 'sequelize';
 import { sequelize } from '../instances/pg';
 
-export interface AlimentoInstance extends Model{
-    id_alimento: number;
-    nome: string;
+export class AlimentoInstance extends Model{
+    declare id_alimento: number;
+    declare nome: string;
 }
 
 export const Alimento = sequelize.define<AlimentoInstance>('Alimento', {
@@ -20,4 +20,4 @@ export const Alimento = sequelize.define<AlimentoInstance>('Alimento', {
     timestamps: false
 })
 
-Alimento.sync({ alter: true });
+Alimento.sync();

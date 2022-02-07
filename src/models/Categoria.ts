@@ -1,9 +1,9 @@
 import { Model, DataTypes } from 'sequelize';
 import { sequelize } from '../instances/pg';
 
-export interface CategoriaInstance extends Model{
-    id_categoria: number;
-    nome: string;
+export class CategoriaInstance extends Model{
+    declare id_categoria: number;
+    declare nome: string;
 }
 
 export const Categoria = sequelize.define<CategoriaInstance>('Categoria', {
@@ -20,4 +20,4 @@ export const Categoria = sequelize.define<CategoriaInstance>('Categoria', {
     timestamps: false
 })
 
-Categoria.sync({ alter: true });
+Categoria.sync();

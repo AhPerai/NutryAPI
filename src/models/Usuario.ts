@@ -2,13 +2,13 @@ import { Model, DataTypes } from 'sequelize';
 import { sequelize } from '../instances/pg';
 import { Refeicao } from '../models/Refeicao'
 
-export interface UsuarioInstance extends Model {
-    id_usuario: number;
-    email: string;
-    senha: string;
-    nome: string;
-    idade: number;
-    genero: string;
+export class UsuarioInstance extends Model {
+    declare id_usuario: number;
+    declare email: string;
+    declare senha: string;
+    declare nome: string;
+    declare idade: number;
+    declare genero: string;
 }
 
 export const Usuario = sequelize.define<UsuarioInstance>('Usuario', {
@@ -37,4 +37,4 @@ export const Usuario = sequelize.define<UsuarioInstance>('Usuario', {
     timestamps: false
 });
 
-Usuario.sync({ alter:true});
+Usuario.sync();

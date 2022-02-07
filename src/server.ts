@@ -2,10 +2,13 @@ import express, {Request, Response} from 'express'
 import path from 'path'
 import dotenv from 'dotenv'
 import cors from 'cors'
+//Main Models
 import usuarioRoutes from './routes/usuario'
 import categoriaRoutes from './routes/categoria'
 import refeicaoRoutes from './routes/refeicao'
 import alimentoRoutes from './routes/alimento'
+//Juction Models
+import refeicao_alimentoRoutes from './routes/refeicao_alimento'
 
 //Iniciando as variáveis de ambiente
 dotenv.config();
@@ -25,6 +28,7 @@ server.use(usuarioRoutes)
 server.use(categoriaRoutes)
 server.use(refeicaoRoutes)
 server.use(alimentoRoutes)
+server.use(refeicao_alimentoRoutes)
 
 //Endpoints básicos do servidor
 server.use((req: Request, res: Response) => {
