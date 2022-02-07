@@ -3,15 +3,17 @@ import { Request, Response } from 'express';
 import { Refeicao } from '../models/Refeicao'
 import { Alimento } from '../models/Alimento'
 import { Refeicao_Alimento } from '../models/Refeicao_Alimento'
+import { Vitamina } from '../models/Vitamina';
+import { Alimento_Vitamina } from '../models/Alimento_Vitamina';
 
-export const getRefeicao = async (req: Request, res: Response) =>{
+export const getRefeicao = async (req: Request, res: Response) => {
     let { id } = req.params;
+    console.log(id);
+    let refeicao = await Refeicao.findByPk(id, { include: Alimento });
 
-    let refeicao = await Refeicao.findByPk(id, {include: Alimento});
-
-    if(refeicao){
+    if (refeicao) {
         res.json({ refeicao })
-    }else {
+    } else {
         res.json({ error: 'Refeição não encontrada' })
     }
 }
@@ -25,7 +27,7 @@ export const createRefeicao = async (req: Request, res: Response) => {
 }
 
 export const listRefeicao = async (req: Request, res: Response) => {
-    let list = await Refeicao.findAll({include: Alimento});
+    let list = await Refeicao.findAll({ include: Alimento });
     res.json({ list });
 }
 
@@ -38,11 +40,30 @@ export const adicionarAlimento = async (req: Request, res: Response) => {
 
     if (refeicao && alimento) {
         let newRefeicaoAlimento = await Refeicao_Alimento.create({ AlimentoIdAlimento, RefeicaoIdRefeicao });
-        let refeicao = await Refeicao.findByPk(RefeicaoIdRefeicao, {include: Alimento});
+        let refeicao = await Refeicao.findByPk(RefeicaoIdRefeicao, { include: Alimento });
         res.json({ refeicao });
     } else {
         res.status(400);
         res.json({ error: 'A refeição ou alimento informado não existe' })
     }
-    
+
+}
+
+export const listVitaminasFromRefeicao = async (req: Request, res: Response) => {
+    let { id } = req.params;
+
+    let list = await Vitamina.findAll({
+        include: [{
+            model: Alimento,
+            required: true,
+            attributes: [],
+            include: [{
+                model: Refeicao,
+                required: true,
+                attributes: [],
+                where: {id_refeicao: id}
+            }],
+        }],
+    });
+    res.json({ list });
 }

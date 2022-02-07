@@ -21,7 +21,6 @@ export const listUsuario = async (req: Request, res: Response) =>{
 
 export const getUsuario = async (req: Request, res: Response) =>{
     let { id } = req.params;
-
     let usuario = await Usuario.findByPk(id, {include: Refeicao});
 
     if(usuario){
@@ -80,12 +79,18 @@ export const verifyLogin = async (req: Request, res:Response)=>{
 
 export const listRefeicaoOfUsuario = async (req: Request, res: Response) =>{
     let { id_usuario } = req.params;
+
     let list = await Refeicao.findAll({
         where : {
             UsuarioIdUsuario: id_usuario
-        }
+        },
+        include:[{
+            model:Usuario,
+            required: true,
+            attributes: [],
+            where: {UsuarioIdUsuario: id_usuario}
+        }],
     });
     res.json({ list });
 }
-
 
