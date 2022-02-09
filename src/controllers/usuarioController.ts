@@ -79,17 +79,10 @@ export const verifyLogin = async (req: Request, res:Response)=>{
 
 export const listRefeicaoOfUsuario = async (req: Request, res: Response) =>{
     let { id_usuario } = req.params;
+    console.log(id_usuario)
 
     let list = await Refeicao.findAll({
-        where : {
-            UsuarioIdUsuario: id_usuario
-        },
-        include:[{
-            model:Usuario,
-            required: true,
-            attributes: [],
-            where: {UsuarioIdUsuario: id_usuario}
-        }],
+        where : { UsuarioIdUsuario: id_usuario },
     });
     res.json({ list });
 }

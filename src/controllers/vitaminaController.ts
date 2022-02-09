@@ -10,7 +10,7 @@ export const listVitamina = async (req: Request, res: Response) =>{
 export const getVitamina = async (req: Request, res: Response) =>{
     let { id } = req.params;
 
-    let vitamina = await Vitamina.findByPk(id, {include: Vitamina});
+    let vitamina = await Vitamina.findByPk(id);
 
     if(vitamina){
         res.json({ vitamina })

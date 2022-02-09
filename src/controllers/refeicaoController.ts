@@ -49,6 +49,20 @@ export const adicionarAlimento = async (req: Request, res: Response) => {
 
 }
 
+export const listAlimentoFromRefeicao = async (req: Request, res: Response) =>{
+    let { id } = req.params;
+
+    let list = await Alimento.findAll({
+        include: [{
+            model: Refeicao,
+            required: true,
+            attributes: [],
+            where: {id_refeicao: id},
+        }],
+    });
+    res.json({ list });
+}
+
 export const listVitaminasFromRefeicao = async (req: Request, res: Response) => {
     let { id } = req.params;
 

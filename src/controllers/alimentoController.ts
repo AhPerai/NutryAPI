@@ -12,6 +12,7 @@ export const createAlimento = async (req: Request, res: Response) => {
     res.json({ id: newAlimento.id_alimento, nome, CategoriumIdCategoria })
 }
 
+//Getters Básicos
 export const getAlimento = async (req: Request, res: Response) =>{
     let { id } = req.params;
 
@@ -29,11 +30,10 @@ export const listAlimento = async (req: Request, res: Response) =>{
     res.json({ list });
 }
 
-
+//relacao
 export const adicionarVitamina = async (req: Request, res: Response) => {
     let { AlimentoIdAlimento,  VitaminaIdVitamina} = req.body;
-    console.log(AlimentoIdAlimento);
-    console.log(VitaminaIdVitamina);
+
     let alimento = await Alimento.findByPk(AlimentoIdAlimento);
     let vitamina = await Alimento.findByPk(VitaminaIdVitamina);
 
@@ -44,6 +44,20 @@ export const adicionarVitamina = async (req: Request, res: Response) => {
     } else {
         res.status(400);
         res.json({ error: 'O alimento ou vitamina informado não existe' })
-    }
-    
+    }  
+}
+
+
+export const listVitaminaFromAlimento = async (req: Request, res: Response) =>{
+    let { id } = req.params;
+
+    let list = await Vitamina.findAll({
+        include: [{
+            model: Alimento,
+            required: true,
+            attributes: [],
+            where: {id_alimento: id},
+        }],
+    });
+    res.json({ list });
 }
