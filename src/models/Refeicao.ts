@@ -14,9 +14,22 @@ Refeicao.init({
         type: DataTypes.INTEGER
     },
     data: {
-        type: DataTypes.DATE
+        type: DataTypes.DATE,
+        get: function () {
+            const options = {
+                timeZone: 'UTC', 
+                hour23: true, 
+                year: 'numeric',
+                month: 'numeric',
+                day: 'numeric',
+                hour: '2-digit', 
+                minute: '2-digit'
+            }
+            return this.getDataValue('data')
+                .toLocaleString('pt-br', options);
+        }
     }
-},{
+}, {
     sequelize,
     tableName: 'refeicao',
     timestamps: false
