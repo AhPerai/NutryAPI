@@ -66,7 +66,8 @@ export const verifyLogin = async (req: Request, res: Response) => {
     let usuario = await Usuario.findOne({
         where: {
             email: email
-        }
+        },
+        include: Refeicao 
     });
     if (usuario) {
         if (usuario.senha == senha) {
