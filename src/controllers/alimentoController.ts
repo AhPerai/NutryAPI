@@ -19,7 +19,7 @@ export const getAlimento = async (req: Request, res: Response) =>{
     let alimento = await Alimento.findByPk(id, {include: Vitamina});
 
     if(alimento){
-        res.json({ alimento })
+        res.json(alimento)
     }else {
         res.json({ error: 'Alimento não encontrado' })
     }
@@ -27,7 +27,7 @@ export const getAlimento = async (req: Request, res: Response) =>{
 
 export const listAlimento = async (req: Request, res: Response) =>{
     let list = await Alimento.findAll({include: Vitamina});
-    res.json({ list });
+    res.json(list);
 }
 
 //relacao
@@ -40,7 +40,7 @@ export const adicionarVitamina = async (req: Request, res: Response) => {
     if (alimento && vitamina) {
         let newAlimentoVitamina = await Alimento_Vitamina.create({ VitaminaIdVitamina, AlimentoIdAlimento });
         let alimento = await Alimento.findByPk(AlimentoIdAlimento, {include: Vitamina});
-        res.json({ alimento });
+        res.json(alimento);
     } else {
         res.status(400);
         res.json({ error: 'O alimento ou vitamina informado não existe' })
@@ -59,5 +59,5 @@ export const listVitaminaFromAlimento = async (req: Request, res: Response) =>{
             where: {id_alimento: id},
         }],
     });
-    res.json({ list });
+    res.json(list);
 }

@@ -20,7 +20,7 @@ export const createUsuario = async (req: Request, res: Response) => {
 
 export const listUsuario = async (req: Request, res: Response) => {
     let list = await Usuario.findAll({ include: Refeicao });
-    res.json({ list });
+    res.json(list);
 }
 
 export const getUsuario = async (req: Request, res: Response) => {
@@ -28,7 +28,27 @@ export const getUsuario = async (req: Request, res: Response) => {
     let usuario = await Usuario.findByPk(id, { include: Refeicao });
 
     if (usuario) {
-        res.json({ usuario })
+        res.json(usuario)
+    } else {
+        res.json({ error: 'Usuário não encontrado' })
+    }
+}
+
+
+export const getUsuarioByEmail = async (req: Request, res: Response) => {
+    let { email } = req.params;
+    console.log(email)
+    let usuario = await Usuario.findOne({
+        where: {
+            email: email
+        },
+        
+    }
+    )
+
+    if (usuario) {
+        res.json(usuario)
+        console.log(usuario)
     } else {
         res.json({ error: 'Usuário não encontrado' })
     }
@@ -47,7 +67,7 @@ export const updateUsuario = async (req: Request, res: Response) => {
         usuario.genero = genero;
         await usuario.save();
 
-        res.json({ usuario });
+        res.json(usuario);
 
     } else {
         res.json({ error: 'Usuário não encontrado' })
@@ -62,16 +82,19 @@ export const deleteUsuario = async (req: Request, res: Response) => {
 
 export const verifyLogin = async (req: Request, res: Response) => {
     let { email, senha } = req.body;
-
+    console.log(email);
+    console.log(senha);
     let usuario = await Usuario.findOne({
         where: {
             email: email
         },
-        include: Refeicao 
+        include: Refeicao
     });
     if (usuario) {
         if (usuario.senha == senha) {
-            res.json({ usuario })
+            res.json(usuario)
+            console.log(usuario);
+            
         } else {
             res.status(400);
             res.json({ error: 'Login inválido' })
@@ -84,12 +107,11 @@ export const verifyLogin = async (req: Request, res: Response) => {
 
 export const listRefeicaoOfUsuario = async (req: Request, res: Response) => {
     let { id_usuario } = req.params;
-    console.log(id_usuario)
 
     let list = await Refeicao.findAll({
         where: { UsuarioIdUsuario: id_usuario },
     });
-    res.json({ list });
+    res.json(list);
 }
 
 export const listTodayRefeicao = async (req: Request, res: Response) => {
@@ -106,6 +128,6 @@ export const listTodayRefeicao = async (req: Request, res: Response) => {
             },
         },
     });
-    res.json({ list });
+    res.json(list);
 }
 

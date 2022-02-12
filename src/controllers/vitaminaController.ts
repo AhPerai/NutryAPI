@@ -4,7 +4,7 @@ import { Vitamina } from '../models/Vitamina'
 
 export const listVitamina = async (req: Request, res: Response) =>{
     let list = await Vitamina.findAll();
-    res.json({ list });
+    res.json(list);
 }
 
 export const getVitamina = async (req: Request, res: Response) =>{
@@ -13,7 +13,7 @@ export const getVitamina = async (req: Request, res: Response) =>{
     let vitamina = await Vitamina.findByPk(id);
 
     if(vitamina){
-        res.json({ vitamina })
+        res.json(vitamina)
     }else {
         res.json({ error: 'Vitamina não encontrada' })
     }

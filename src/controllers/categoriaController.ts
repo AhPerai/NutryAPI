@@ -9,7 +9,7 @@ export const getCategoria = async (req: Request, res: Response) => {
     let categoria = await Categoria.findByPk(id);
 
     if (categoria) {
-        res.json({ categoria })
+        res.json(categoria)
     } else {
         res.json({ error: 'Categoria não encontrada' })
     }
@@ -17,7 +17,7 @@ export const getCategoria = async (req: Request, res: Response) => {
 
 export const listCategoria = async (req: Request, res: Response) =>{
     let list = await Categoria.findAll();
-    res.json({ list });
+    res.json(list);
 }
 
 export const listAlimentoFromCategoria = async (req: Request, res: Response) => {
@@ -27,5 +27,5 @@ export const listAlimentoFromCategoria = async (req: Request, res: Response) => 
     let list = await Alimento.findAll({
         where: { CategoriumIdCategoria: id_categoria },
     });
-    res.json({ list });
+    res.json(list);
 }

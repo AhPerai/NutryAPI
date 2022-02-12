@@ -13,6 +13,6 @@ refeicaoRouter.post('/refeicao/alimento/relacao', refeicaoController.adicionarAl
 
 refeicaoRouter.get('/refeicao/alimento/:id', refeicaoController.listAlimentoFromRefeicao)
 refeicaoRouter.get('/refeicao/vitamina/:id', refeicaoController.listVitaminasFromRefeicao)
-
+refeicaoRouter.get('/refeicao/novitamina/:id', refeicaoController.listVitaminasNotInRefeicao)
 
 export default refeicaoRouter;
