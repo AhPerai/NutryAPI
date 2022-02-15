@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import { Agua } from '../models/Agua';
 // import { sequelize } from '../instances/pg';
 import { Refeicao } from '../models/Refeicao';
 
@@ -105,6 +106,8 @@ export const verifyLogin = async (req: Request, res: Response) => {
     }
 }
 
+//Funções relacionadas a busca de consumo de refeições 
+
 export const listRefeicaoOfUsuario = async (req: Request, res: Response) => {
     let { id_usuario } = req.params;
 
@@ -119,6 +122,34 @@ export const listTodayRefeicao = async (req: Request, res: Response) => {
     const TODAY_START = new Date().setHours(0, 0, 0, 0);
     const NOW = new Date();
     let list = await Refeicao.findAll({
+
+        where: {
+            UsuarioIdUsuario: id_usuario,
+            data: {
+                [Op.gt]: TODAY_START,
+                [Op.lt]: NOW
+            },
+        },
+    });
+    res.json(list);
+}
+
+//Funções relacionadas a busca de consumo de água 
+
+export const listAguaOfUsuario = async (req: Request, res: Response) => {
+    let { id_usuario } = req.params;
+
+    let list = await Agua.findAll({
+        where: { UsuarioIdUsuario: id_usuario },
+    });
+    res.json(list);
+}
+
+export const listTodayAgua = async (req: Request, res: Response) => {
+    let { id_usuario } = req.params;
+    const TODAY_START = new Date().setHours(0, 0, 0, 0);
+    const NOW = new Date();
+    let list = await Agua.findAll({
 
         where: {
             UsuarioIdUsuario: id_usuario,

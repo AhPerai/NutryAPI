@@ -21,11 +21,11 @@ export const getRefeicao = async (req: Request, res: Response) => {
 }
 
 export const createRefeicao = async (req: Request, res: Response) => {
-    let { data, UsuarioIdUsuario } = req.body;
-    let newRefeicao = await Refeicao.create({ data, UsuarioIdUsuario });
+    let { UsuarioIdUsuario } = req.body;
+    let newRefeicao = await Refeicao.create({ UsuarioIdUsuario });
 
     res.status(201);
-    res.json({ id: newRefeicao.id_refeicao, data, UsuarioIdUsuario })
+    res.json({ id_refeicao: newRefeicao.id_refeicao, data: newRefeicao.data, UsuarioIdUsuario })
 }
 
 export const listRefeicao = async (req: Request, res: Response) => {
@@ -62,6 +62,7 @@ export const listAlimentoFromRefeicao = async (req: Request, res: Response) =>{
             where: {id_refeicao: id},
         }],
     });
+    console.log(list);
     res.json(list);
 }
 

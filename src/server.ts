@@ -6,6 +6,7 @@ import cors from 'cors'
 import usuarioRoutes from './routes/usuario'
 import categoriaRoutes from './routes/categoria'
 import refeicaoRoutes from './routes/refeicao'
+import aguaRoutes from './routes/agua'
 import alimentoRoutes from './routes/alimento'
 import vitaminaRoutes from './routes/vitamina'
 //Junction Models
@@ -31,6 +32,7 @@ server.use(categoriaRoutes)
 server.use(refeicaoRoutes)
 server.use(alimentoRoutes)
 server.use(vitaminaRoutes)
+server.use(aguaRoutes)
 //Junction Table routes
 server.use(refeicao_alimentoRoutes)
 server.use(alimento_vitaminaRoutes)

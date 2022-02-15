@@ -13,7 +13,11 @@ usuarioRouter.delete('/usuario/:id', usuarioController.deleteUsuario)
 
 usuarioRouter.post('/usuario/login', usuarioController.verifyLogin)
 usuarioRouter.get('/usuario/email/:email', usuarioController.getUsuarioByEmail);
+
 usuarioRouter.get('/usuario/refeicao/:id_usuario', usuarioController.listRefeicaoOfUsuario);
 usuarioRouter.get('/usuario/refeicao/hoje/:id_usuario', usuarioController.listTodayRefeicao);
+
+usuarioRouter.get('/usuario/agua/:id_usuario', usuarioController.listAguaOfUsuario);
+usuarioRouter.get('/usuario/agua/hoje/:id_usuario', usuarioController.listTodayAgua);
 
 export default usuarioRouter;

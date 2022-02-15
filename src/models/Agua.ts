@@ -3,13 +3,14 @@ import { sequelize } from '../instances/pg';
 import { Usuario } from '../models/Usuario'
 const Sequelize = require('sequelize');
 
-export class Refeicao extends Model {
-    declare id_refeicao: number;
+export class Agua extends Model {
+    declare id_agua: number;
     declare data: Date;
+    declare quantidade: number;
 }
 
-Refeicao.init({
-    id_refeicao: {
+Agua.init({
+    id_agua: {
         primaryKey: true,
         autoIncrement: true,
         type: DataTypes.INTEGER
@@ -17,14 +18,17 @@ Refeicao.init({
     data: {
         type: DataTypes.DATE,
         defaultValue: Sequelize.NOW
+    },
+    quantidade:{
+        type: DataTypes.INTEGER
     }
 }, {
     sequelize,
-    tableName: 'refeicao',
+    tableName: 'agua',
     timestamps: false
 })
 
-Usuario.hasMany(Refeicao);
-Refeicao.belongsTo(Usuario);
+Usuario.hasMany(Agua);
+Agua.belongsTo(Usuario);
 
-Refeicao.sync({ alter: true });
+Agua.sync({ alter: true });
